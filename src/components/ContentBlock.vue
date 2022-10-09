@@ -49,12 +49,29 @@
 import Logo from '@/assets/logo.svg';
 import UserList from '@/components/UserList.vue';
 import Filter from '@/components/Filter.vue';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
 const name = 'ContentBlock';
 
 const items = ['russia', 'usa', '> 20', '< 10'];
 const variant = 'default';
-const users = [
+
+const store = useStore();
+
+const users = computed(() => store.state.users);
+
+if (!users.value.length) {
+  store.dispatch('getUsers').catch((err) => {
+    console.log('-err', err);
+    // notify({
+    //     title: err,
+    //     type: 'error',
+    // });
+  });
+}
+
+const usersss = [
   { type: 'subheader', title: 'List' },
   {
     prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
