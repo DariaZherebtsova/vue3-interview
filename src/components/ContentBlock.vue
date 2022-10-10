@@ -19,14 +19,25 @@
         md="6"
         lg="6"
       >
-        <Filter :items="items" />
+        <Filter
+          :modelValue="selectedCountry"
+          :items="countryList"
+          label="Filter by country"
+          @update:modelValue="changeCountry"
+        />
 
-        <v-select
+        <Filter
+          :modelValue="selectedScoreRange"
+          :items="scoreList"
+          label="Filter by score"
+          @update:modelValue="changeScore"
+        />
+        <!-- <v-select
           v-model="variant"
           :items="items"
           clearable
           label="Filter by score"
-        ></v-select>
+        ></v-select> -->
       </v-col>
 
       <v-col
@@ -48,18 +59,19 @@
 <script setup lang="ts">
 import Logo from '@/assets/logo.svg';
 import UserList from '@/components/UserList.vue';
-import Filter from '@/components/Filter.vue';
+import Filter from '@/components/BaseFilters.vue';
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 const name = 'ContentBlock';
 
-const items = ['russia', 'usa', '> 20', '< 10'];
-const variant = 'default';
+const countryList = ['russia', 'usa'];
+const scoreList = ['> 20', '< 10'];
 
 const store = useStore();
-
-const users = computed(() => store.state.users);
+const selectedCountry = computed(() => store.state.selectedCountry);
+const selectedScoreRange = computed(() => store.state.selectedScoreRange);
+const users = computed(() => store.getters.filtredUsers);
 
 if (!users.value.length) {
   store.dispatch('getUsers').catch((err) => {
@@ -71,39 +83,14 @@ if (!users.value.length) {
   });
 }
 
-const usersss = [
-  { type: 'subheader', title: 'List' },
-  {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    title: 'Brunch this weekend?',
-    subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-  },
-  { type: 'divider', inset: true },
-  {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-    title: 'Summer BBQ',
-    subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-  },
-  { type: 'divider', inset: true },
-  {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-    title: 'Oui oui',
-    subtitle:
-      '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-  },
-  { type: 'divider', inset: true },
-  {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-    title: 'Birthday gift',
-    subtitle:
-      '<span class="text-primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-  },
-  { type: 'divider', inset: true },
-  {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-    title: 'Recipe to try',
-    subtitle:
-      '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-  },
-];
+function changeCountry(val: string) {
+  console.log('--changeCountry', val);
+  store.commit('setSelectedCountry', val);
+}
+
+function changeScore(val: string) {
+  console.log('--changeScore', val);
+  store.commit('setSelectedScoreRange', val);
+}
+
 </script>

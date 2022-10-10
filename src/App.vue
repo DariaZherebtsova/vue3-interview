@@ -18,8 +18,13 @@ import TheFooter from '@/components/TheFooter.vue';
 import ContentBlock from '@/components/ContentBlock.vue';
 import { computed } from 'vue';
 
+type Attributes = {
+  absolute?: boolean;
+  fixed?: boolean;
+};
+
 const localAttrs = computed(() => {
-  const attrs = {};
+  const attrs: Attributes = {};
   attrs.absolute = true;
   attrs.fixed = false;
 
