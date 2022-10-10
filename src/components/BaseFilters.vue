@@ -1,10 +1,10 @@
 <template>
   <v-select
-    :modelValue="selectedItem"
     :items="items"
     variant="underlined"
     :label="label"
     @update:modelValue="change"
+    clearable
   ></v-select>
 </template>
 

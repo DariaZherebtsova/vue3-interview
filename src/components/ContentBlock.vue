@@ -20,14 +20,12 @@
         lg="6"
       >
         <Filter
-          :modelValue="selectedCountry"
           :items="countryList"
           label="Filter by country"
           @update:modelValue="changeCountry"
         />
 
         <Filter
-          :modelValue="selectedScoreRange"
           :items="scoreList"
           label="Filter by score"
           @update:modelValue="changeScore"
@@ -65,12 +63,12 @@ import { useStore } from 'vuex';
 
 const name = 'ContentBlock';
 
-const countryList = ['russia', 'usa'];
+const countryList = ['Russia', 'USA'];
 const scoreList = ['> 20', '< 10'];
 
 const store = useStore();
-const selectedCountry = computed(() => store.state.selectedCountry);
-const selectedScoreRange = computed(() => store.state.selectedScoreRange);
+// const selectedCountry = computed(() => store.state.selectedCountry);
+// const selectedScoreRange = computed(() => store.state.selectedScoreRange);
 const users = computed(() => store.getters.filtredUsers);
 
 if (!users.value.length) {

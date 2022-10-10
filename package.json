@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "axios": "^1.1.2",
+    "material-design-icons-iconfont": "^6.7.0",
     "vue": "^3.2.38",
     "vuetify": "^3.0.0-beta.11",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@mdi/font": "^7.0.96",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/node": "^16.11.56",
     "@vitejs/plugin-vue": "^3.0.3",

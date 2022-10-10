@@ -1,4 +1,4 @@
-export function checkUserScore(score: number, rule: string) {
+export function checkUserScore(score: number, rule: string | null) {
   console.log(`score=${score} rule=${rule}`);
   switch (rule) {
     case '> 20':

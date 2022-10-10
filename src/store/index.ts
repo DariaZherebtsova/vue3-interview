@@ -4,11 +4,18 @@ import type { User } from './types';
 import { users } from '@/mock_data/users.js';
 import { checkUserScore } from './utils';
 
+// type UserState = {
+//   users: [];
+//   selectedCountry: null | string;
+//   selectedScoreRange: null | string;
+//   isLoading: boolean;
+// };
+
 const store = createStore({
   state: {
     users: [],
-    selectedCountry: '',
-    selectedScoreRange: '',
+    selectedCountry: null,
+    selectedScoreRange: null,
     isLoading: false,
   },
   getters: {
@@ -17,11 +24,11 @@ const store = createStore({
       console.log(
         `selectedCountry=${state.selectedCountry} selectedScoreRange=${state.selectedScoreRange}`
       );
-      if (!state.selectedCountry.length && !state.selectedScoreRange.length) {
+      if (state.selectedCountry === null && state.selectedScoreRange === null) {
         return state.users;
       }
 
-      if (state.selectedCountry.length && state.selectedScoreRange.length) {
+      if (state.selectedCountry !== null && state.selectedScoreRange !== null) {
         return state.users.filter(
           (user: User) =>
             user.country === state.selectedCountry &&
@@ -29,13 +36,13 @@ const store = createStore({
         );
       }
 
-      if (state.selectedCountry.length) {
+      if (state.selectedCountry !== null) {
         return state.users.filter(
           (user: User) => user.country === state.selectedCountry
         );
       }
 
-      if (state.selectedScoreRange.length) {
+      if (state.selectedScoreRange !== null) {
         return state.users.filter((user: User) =>
           checkUserScore(user.score, state.selectedScoreRange)
         );
