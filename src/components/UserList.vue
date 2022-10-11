@@ -3,6 +3,7 @@
     :items="items"
     item-props
     lines="three"
+    @click="onListItemClick"
   >
     <template v-slot:subtitle="{ subtitle }">
       <div v-html="subtitle"></div>
@@ -33,6 +34,14 @@ const items = computed(() => {
   result.pop();
   return result;
 });
+
+function onListItemClick(e: MouseEvent) {
+  console.log('--click', e.target);
+  var element = e.target as HTMLElement;
+  if (element.tagName === 'IMG') {
+    console.log(element.tagName);
+  }
+}
 </script>
 
 <style lang=""></style>
