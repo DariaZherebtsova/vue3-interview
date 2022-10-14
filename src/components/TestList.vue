@@ -11,9 +11,18 @@
         ></v-divider>
         <v-list-item>
           <template v-slot:prepend>
-            <v-avatar>
-              <v-img :src="item.prependAvatar"></v-img>
-            </v-avatar>
+            <v-tooltip
+              location="top"
+              :text="item.title"
+              :open-on-hover="false"
+              open-on-click
+            >
+              <template v-slot:activator="{ props }">
+                <v-avatar v-bind="props">
+                  <v-img :src="item.prependAvatar"></v-img>
+                </v-avatar>
+              </template>
+            </v-tooltip>
           </template>
           <v-list-item-title class="text-h6 text-third">
             {{ item.title }}
