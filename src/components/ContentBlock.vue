@@ -30,12 +30,6 @@
           label="Filter by score"
           @update:modelValue="changeScore"
         />
-        <!-- <v-select
-          v-model="variant"
-          :items="items"
-          clearable
-          label="Filter by score"
-        ></v-select> -->
       </v-col>
 
       <v-col
@@ -47,8 +41,7 @@
           max-width="450"
           class="mx-auto"
         >
-          <!-- <UserList :users="users" /> -->
-          <TestList :users="users" />
+          <UserList :users="users" />
         </v-card>
       </v-col>
     </v-row>
@@ -57,8 +50,7 @@
 
 <script setup lang="ts">
 import Logo from '@/assets/logo.svg';
-// import UserList from '@/components/UserList.vue';
-import TestList from '@/components/TestList.vue';
+import UserList from '@/components/UserList.vue';
 import Filter from '@/components/BaseFilters.vue';
 import { computed } from 'vue';
 import { useStore } from 'vuex';
@@ -69,28 +61,19 @@ const countryList = ['Russia', 'USA'];
 const scoreList = ['> 20', '< 10'];
 
 const store = useStore();
-// const selectedCountry = computed(() => store.state.selectedCountry);
-// const selectedScoreRange = computed(() => store.state.selectedScoreRange);
 const users = computed(() => store.getters.filtredUsers);
 
 if (!users.value.length) {
   store.dispatch('getUsers').catch((err) => {
-    console.log('-err', err);
-    // notify({
-    //     title: err,
-    //     type: 'error',
-    // });
+    console.log('err getUsers', err);
   });
 }
 
 function changeCountry(val: string) {
-  console.log('--changeCountry', val);
   store.commit('setSelectedCountry', val);
 }
 
 function changeScore(val: string) {
-  console.log('--changeScore', val);
   store.commit('setSelectedScoreRange', val);
 }
-
 </script>

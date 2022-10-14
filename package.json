@@ -13,7 +13,6 @@
     "axios": "^1.1.2",
     "material-design-icons-iconfont": "^6.7.0",
     "vue": "^3.2.38",
-    "vue3-popper": "^1.5.0",
     "vuetify": "^3.0.0-beta.11",
     "vuex": "^4.0.2"
   },

@@ -4,13 +4,6 @@ import type { User } from './types';
 import { users } from '@/mock_data/users.js';
 import { checkUserScore } from './utils';
 
-// type UserState = {
-//   users: [];
-//   selectedCountry: null | string;
-//   selectedScoreRange: null | string;
-//   isLoading: boolean;
-// };
-
 const store = createStore({
   state: {
     users: [],
@@ -20,10 +13,6 @@ const store = createStore({
   },
   getters: {
     filtredUsers(state) {
-      console.log('--filtredUsers');
-      console.log(
-        `selectedCountry=${state.selectedCountry} selectedScoreRange=${state.selectedScoreRange}`
-      );
       if (state.selectedCountry === null && state.selectedScoreRange === null) {
         return state.users;
       }
@@ -57,11 +46,9 @@ const store = createStore({
       state.isLoading = loading;
     },
     setSelectedCountry(state, country) {
-      console.log('setSelectedCountry', country);
       state.selectedCountry = country;
     },
     setSelectedScoreRange(state, scoreRange) {
-      console.log('setSelectedScoreRange', scoreRange);
       state.selectedScoreRange = scoreRange;
     },
   },
@@ -74,7 +61,6 @@ const store = createStore({
           context.commit('setUsers', result);
         })
         .catch((err) => {
-          console.log('---catch', err);
           // mock data
           context.commit('setUsers', users);
         })

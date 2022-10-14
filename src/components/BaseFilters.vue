@@ -22,16 +22,9 @@ const props = defineProps({
   label: {
     type: String,
   },
-  modelValue: {
-    type: String,
-  },
 });
 
-let selectedItem = ref('');
-
 function change(val: string) {
-  console.log('--filter change', val);
-  selectedItem.value = val;
   emit('update:modelValue', val);
 }
 </script>
