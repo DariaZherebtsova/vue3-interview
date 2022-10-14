@@ -4,7 +4,7 @@
 
 Проект на Vue3, Vuex, TypeScript и Vuetify 3  
 
-![Screenshot](/screenshot.png)
+![Screenshot](/src/assets/screenshot.png)
 
 ## Project Setup
 
